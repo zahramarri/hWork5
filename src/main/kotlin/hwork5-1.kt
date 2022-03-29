@@ -57,3 +57,17 @@ class HatchbackCar: PrivateTransportationVehicle {
 
     override val maxCapacity: Int = 4
 }
+
+fun main() {
+    val listOfCars = mutableListOf<Any>()
+    for (i in 1..10) {
+        when((1..6).random()) {
+            1 -> listOfCars.add(Subway())
+            2 -> listOfCars.add(Taxi())
+            3 -> listOfCars.add(Ambulance())
+            4 -> listOfCars.add(Truck())
+            5 -> listOfCars.add(SportCar())
+            else -> listOfCars.add(HatchbackCar())
+        }
+    }
+}
