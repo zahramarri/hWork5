@@ -44,4 +44,10 @@ fun main() {
     println("Total payment for Reza is: " + manager2.salary(10.0))
     println("Total payment for Farhad is: " + manager3.salary(10.0))
     println("Total payment for Sama is: " + clerk1.salary(10.0))
+
+    val customer1 = Customer("Sara", 22, Gender.Female)
+    val customer2 = Customer("Maryam", 30, Gender.Female)
+
+    println("-----check if customer 1 and 2 are the same-----")
+    println(customer1 == customer2)
 }
