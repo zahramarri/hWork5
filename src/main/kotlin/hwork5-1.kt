@@ -2,15 +2,23 @@ interface Vehicle {
     val name: String
     val maxSpeed: Int
     val maxCapacity: Int
+
+//    override fun compareTo(other: Vehicle): Int {
+//        return when {
+//        this.maxCapacity > other.maxCapacity -> 1
+//        this.maxCapacity < other.maxCapacity -> - 1
+//        else -> 0
+//        }
+//    }
 }
 
-interface PublicTransportationVehicle: Vehicle
+interface PublicTransportationVehicle : Vehicle
 
-interface ServiceTransportationVehicle: Vehicle
+interface ServiceTransportationVehicle : Vehicle
 
-interface PrivateTransportationVehicle: Vehicle
+interface PrivateTransportationVehicle : Vehicle
 
-class Subway: PublicTransportationVehicle {
+class Subway : PublicTransportationVehicle {
     override val name: String = "Subway"
 
     override val maxSpeed: Int = 28
@@ -18,7 +26,7 @@ class Subway: PublicTransportationVehicle {
     override val maxCapacity: Int = 500
 }
 
-class Taxi: PublicTransportationVehicle {
+class Taxi : PublicTransportationVehicle {
     override val name: String = "Taxi"
 
     override val maxSpeed: Int = 80
@@ -26,7 +34,7 @@ class Taxi: PublicTransportationVehicle {
     override val maxCapacity: Int = 4
 }
 
-class Ambulance: ServiceTransportationVehicle {
+class Ambulance : ServiceTransportationVehicle {
     override val name: String = "Ambulance"
 
     override val maxSpeed: Int = 124
@@ -34,7 +42,7 @@ class Ambulance: ServiceTransportationVehicle {
     override val maxCapacity: Int = 5
 }
 
-class Truck: ServiceTransportationVehicle {
+class Truck : ServiceTransportationVehicle {
     override val name: String = "Truck"
 
     override val maxSpeed: Int = 85
@@ -42,7 +50,7 @@ class Truck: ServiceTransportationVehicle {
     override val maxCapacity: Int = 3
 }
 
-class SportCar: PrivateTransportationVehicle {
+class SportCar : PrivateTransportationVehicle {
     override val name: String = "Sport Car"
 
     override val maxSpeed: Int = 400
@@ -50,7 +58,7 @@ class SportCar: PrivateTransportationVehicle {
     override val maxCapacity: Int = 2
 }
 
-class HatchbackCar: PrivateTransportationVehicle {
+class HatchbackCar : PrivateTransportationVehicle {
     override val name: String = "Hatchback Car"
 
     override val maxSpeed: Int = 280
@@ -59,15 +67,37 @@ class HatchbackCar: PrivateTransportationVehicle {
 }
 
 fun main() {
-    val listOfCars = mutableListOf<Any>()
-    for (i in 1..10) {
-        when((1..6).random()) {
-            1 -> listOfCars.add(Subway())
-            2 -> listOfCars.add(Taxi())
-            3 -> listOfCars.add(Ambulance())
-            4 -> listOfCars.add(Truck())
-            5 -> listOfCars.add(SportCar())
-            else -> listOfCars.add(HatchbackCar())
+    val listOfVehicles = Array<Vehicle?>(10) { null }
+    for (i in listOfVehicles.indices) {
+        val randomObj = when ((1..6).random()) {
+            1 -> Subway()
+            2 -> Taxi()
+            3 -> Ambulance()
+            4 -> Truck()
+            5 -> SportCar()
+            else -> HatchbackCar()
         }
+        listOfVehicles[i] = randomObj
+    }
+
+    println("-----Vehicles sorted based on MAXIMUM SPEED-----")
+    val speedComparator = kotlin.Comparator { vehicle1: Vehicle, vehicle2: Vehicle
+        ->
+        vehicle1.maxSpeed - vehicle2.maxSpeed
+    }
+    listOfVehicles.run {
+        sortedWith(speedComparator)
+            .reversed()
+            .forEach { println("${it?.name}: ${it?.maxSpeed}") }
+    }
+
+    println("-----Vehicles sorted based on MINIMUM CAPACITY-----")
+    val capacityComparator = kotlin.Comparator { vehicle1: Vehicle, vehicle2: Vehicle
+        ->
+        vehicle1.maxCapacity - vehicle2.maxCapacity
+    }
+    listOfVehicles.run {
+        sortedWith(capacityComparator)
+            .forEach { println("${it?.name}: ${it?.maxCapacity}") }
     }
 }
