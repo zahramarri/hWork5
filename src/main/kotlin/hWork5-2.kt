@@ -1,6 +1,6 @@
 abstract class Employee(
     private val name: String,
-    private val age: Int,
+    val age: Int,
     protected val hourRate: Double
 ) {
 
@@ -50,4 +50,10 @@ fun main() {
 
     println("-----check if customer 1 and 2 are the same-----")
     println(customer1 == customer2)
+
+    val listOfManagers = mutableListOf(manager1, manager2, manager3)
+
+    println("-----find the oldest manager and print his information-----")
+    listOfManagers.maxByOrNull { manager -> manager.age }.run { println(this) }
 }
+
