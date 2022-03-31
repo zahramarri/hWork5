@@ -2,14 +2,6 @@ interface Vehicle {
     val name: String
     val maxSpeed: Int
     val maxCapacity: Int
-
-//    override fun compareTo(other: Vehicle): Int {
-//        return when {
-//        this.maxCapacity > other.maxCapacity -> 1
-//        this.maxCapacity < other.maxCapacity -> - 1
-//        else -> 0
-//        }
-//    }
 }
 
 interface PublicTransportationVehicle : Vehicle
