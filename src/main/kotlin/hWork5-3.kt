@@ -22,3 +22,11 @@ class Generic<T>(private val a: T, private val b: T) {
         }
     }
 }
+
+fun main() {
+    val test1 = Generic(4, 7)
+    val test2 = Generic("a", "b")
+
+    println(test1.compare())
+    println(test2.compare())
+}
