@@ -2,7 +2,7 @@ fun convertBinaryToDecimal(Number: String): String? {
     var decimalNumber: String? = null
 
     for (i in Number.indices) {
-        if (Number[i].code > 1 ) {
+        if (Number[i].code > 1) {
             println("Error: invalid number")
             return null
         }
@@ -12,28 +12,27 @@ fun convertBinaryToDecimal(Number: String): String? {
         val binaryNumber = "$Number.0"
     }
 
-    val integerPartOfBinaryNumber = Number.split(".")[0]
+    val integerPartOfBinaryNumber = Number.split(".")[0].reversed()
 
-    val listOfDigits = mutableListOf<Int>()
-    var temp = 1
+    val listOfDigits1 = mutableListOf<Int>()
     for (i in integerPartOfBinaryNumber.indices) {
+        var temp1 = 1
         if (integerPartOfBinaryNumber[i] == '0') {
             continue
         } else {
-            if (i == integerPartOfBinaryNumber.lastIndex) {
-                temp = 1
+            if (i == 0) {
+                temp1 = 1
             } else {
-                for (j in 0..i) {
-                    temp *= 2
+                for (j in 1..i) {
+                    temp1 *= 2
                 }
             }
         }
-        listOfDigits.add(temp)
+        listOfDigits1.add(temp1)
     }
-    val integerPartOfDecimalNumber = listOfDigits.sum()
+    val integerPartOfDecimalNumber = listOfDigits1.sum()
 
-
-    return decimalNumber
+   return decimalNumber
 }
 
-fun convertDecimalToBinary(){}
+fun convertDecimalToBinary() {}
