@@ -1,18 +1,16 @@
-fun convertBinaryToDecimal(Number: String): String? {
-    var decimalNumber: String? = null
-
-    for (i in Number.indices) {
-        if (Number[i].code > 1) {
+fun convertBinaryToDecimal(number: String): String? {
+    for (i in number.indices) {
+        if (number[i] != '.' && Integer.parseInt(number[i].toString()) > 1) {
             println("Error: invalid number")
             return null
         }
     }
 
-    if ('.' !in Number) {
-        val binaryNumber = "$Number.0"
+    if ('.' !in number) {
+        val binaryNumber = "$number.0"
     }
 
-    val integerPartOfBinaryNumber = Number.split(".")[0].reversed()
+    val integerPartOfBinaryNumber = number.split(".")[0].reversed()
 
     val listOfDigits1 = mutableListOf<Int>()
     for (i in integerPartOfBinaryNumber.indices) {
@@ -32,7 +30,24 @@ fun convertBinaryToDecimal(Number: String): String? {
     }
     val integerPartOfDecimalNumber = listOfDigits1.sum()
 
-   return decimalNumber
+    val decimalPartOfBinaryNumber = number.split(".")[1]
+
+    val listOfDigits2 = mutableListOf<Double>()
+    for (i in decimalPartOfBinaryNumber.indices) {
+        var temp2 = 1.0
+        if (decimalPartOfBinaryNumber[i] == '0') {
+            continue
+        } else {
+            for (j in 0..i) {
+                temp2 /= 2
+            }
+        }
+        listOfDigits2.add(temp2)
+    }
+    val decimalPartOfDecimalNumber = listOfDigits2.sum().toString().removePrefix("0.")
+
+    return "$integerPartOfDecimalNumber.$decimalPartOfDecimalNumber"
 }
 
 fun convertDecimalToBinary() {}
+
