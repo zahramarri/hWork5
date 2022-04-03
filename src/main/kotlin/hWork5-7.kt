@@ -6,7 +6,7 @@ fun convertBinaryToDecimal(number: String): String? {
         }
     }
 
-    var binaryNumber =""
+    var binaryNumber = number
     if ('.' !in number) {
         binaryNumber = "$number.0"
     }
@@ -31,21 +31,25 @@ fun convertBinaryToDecimal(number: String): String? {
     }
     val integerPartOfDecimalNumber = listOfDigits1.sum()
 
-    val decimalPartOfBinaryNumber = binaryNumber.split(".")[1]
+    var decimalPartOfDecimalNumber = "0"
 
-    val listOfDigits2 = mutableListOf<Double>()
-    for (i in decimalPartOfBinaryNumber.indices) {
-        var temp2 = 1.0
-        if (decimalPartOfBinaryNumber[i] == '0') {
-            continue
-        } else {
-            for (j in 0..i) {
-                temp2 /= 2
+    if (binaryNumber.split(".").size > 1) {
+        val decimalPartOfBinaryNumber = binaryNumber.split(".")[1]
+
+        val listOfDigits2 = mutableListOf<Double>()
+        for (i in decimalPartOfBinaryNumber.indices) {
+            var temp2 = 1.0
+            if (decimalPartOfBinaryNumber[i] == '0') {
+                continue
+            } else {
+                for (j in 0..i) {
+                    temp2 /= 2
+                }
             }
+            listOfDigits2.add(temp2)
         }
-        listOfDigits2.add(temp2)
+        decimalPartOfDecimalNumber = listOfDigits2.sum().toString().removePrefix("0.")
     }
-    val decimalPartOfDecimalNumber = listOfDigits2.sum().toString().removePrefix("0.")
 
     return "$integerPartOfDecimalNumber.$decimalPartOfDecimalNumber"
 }
@@ -68,16 +72,26 @@ fun convertDecimalToBinary(number: String): String {
     }
     integerPartOfBinaryNumber = quotient.toString() + integerPartOfBinaryNumber
 
-    val decimalPartOfDecimalNumber = decimalNumber.split(".")[1]
+    var decimalPartOfBinaryNumber = "0"
+    if (decimalNumber.split(".").size > 1) {
+        val decimalPartOfDecimalNumber = decimalNumber.split(".")[1]
 
-    var decimalPartOfBinaryNumber = ""
-    var multiple = ("0.$decimalPartOfDecimalNumber").toDouble()
-    while (multiple != 0.0 && multiple != 1.0) {
-        multiple *= 2
-        decimalPartOfBinaryNumber += multiple.toString().split('.')[0]
-        multiple = ("0." + multiple.toString().split('.')[1]).toDouble()
+        var multiple = ("0.$decimalPartOfDecimalNumber").toDouble()
+        while (multiple != 0.0 && multiple != 1.0) {
+            multiple *= 2
+            decimalPartOfBinaryNumber += multiple.toString().split('.')[0]
+            multiple = ("0." + multiple.toString().split('.')[1]).toDouble()
+        }
     }
 
     return "$integerPartOfBinaryNumber.$decimalPartOfBinaryNumber"
 }
 
+
+fun main() {
+    println(convertDecimalToBinary("8.09375"))
+    println(convertDecimalToBinary("65"))
+
+    println(convertBinaryToDecimal("1011"))
+    println(convertBinaryToDecimal("0.1011"))
+}
