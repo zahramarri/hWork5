@@ -51,7 +51,7 @@ fun convertBinaryToDecimal(number: String): String? {
 }
 
 fun convertDecimalToBinary(number: String): String {
-    var decimalNumber =""
+    var decimalNumber = number
     if ('.' !in number) {
         decimalNumber = "$number.0"
     }
@@ -68,8 +68,16 @@ fun convertDecimalToBinary(number: String): String {
     }
     integerPartOfBinaryNumber = quotient.toString() + integerPartOfBinaryNumber
 
-return integerPartOfBinaryNumber
+    val decimalPartOfDecimalNumber = decimalNumber.split(".")[1]
+
+    var decimalPartOfBinaryNumber = ""
+    var multiple = ("0.$decimalPartOfDecimalNumber").toDouble()
+    while (multiple != 0.0 && multiple != 1.0) {
+        multiple *= 2
+        decimalPartOfBinaryNumber += multiple.toString().split('.')[0]
+        multiple = ("0." + multiple.toString().split('.')[1]).toDouble()
+    }
+
+    return "$integerPartOfBinaryNumber.$decimalPartOfBinaryNumber"
 }
-
-
 
