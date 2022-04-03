@@ -50,5 +50,26 @@ fun convertBinaryToDecimal(number: String): String? {
     return "$integerPartOfDecimalNumber.$decimalPartOfDecimalNumber"
 }
 
-fun convertDecimalToBinary() {}
+fun convertDecimalToBinary(number: String): String {
+    var decimalNumber =""
+    if ('.' !in number) {
+        decimalNumber = "$number.0"
+    }
+
+    val integerPartOfDecimalNumber = decimalNumber.split(".")[0]
+
+    var quotient = integerPartOfDecimalNumber.toInt()
+    var integerPartOfBinaryNumber = ""
+    while (quotient >= 2) {
+        val lastDivisor = quotient
+        quotient /= 2
+        val reminder = lastDivisor - (quotient * 2)
+        integerPartOfBinaryNumber = reminder.toString() + integerPartOfBinaryNumber
+    }
+    integerPartOfBinaryNumber = quotient.toString() + integerPartOfBinaryNumber
+
+return integerPartOfBinaryNumber
+}
+
+
 
