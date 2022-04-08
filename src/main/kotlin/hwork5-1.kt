@@ -1,7 +1,7 @@
 interface Vehicle {
     val name: String
     val maxSpeed: Int
-    val maxCapacity: Int
+    val capacity: Int
 }
 
 interface PublicTransportationVehicle : Vehicle
@@ -15,7 +15,7 @@ class Subway : PublicTransportationVehicle {
 
     override val maxSpeed: Int = 28
 
-    override val maxCapacity: Int = 500
+    override val capacity: Int = 500
 }
 
 class Taxi : PublicTransportationVehicle {
@@ -23,7 +23,7 @@ class Taxi : PublicTransportationVehicle {
 
     override val maxSpeed: Int = 80
 
-    override val maxCapacity: Int = 4
+    override val capacity: Int = 4
 }
 
 class Ambulance : ServiceTransportationVehicle {
@@ -31,7 +31,7 @@ class Ambulance : ServiceTransportationVehicle {
 
     override val maxSpeed: Int = 124
 
-    override val maxCapacity: Int = 5
+    override val capacity: Int = 5
 }
 
 class Truck : ServiceTransportationVehicle {
@@ -39,7 +39,7 @@ class Truck : ServiceTransportationVehicle {
 
     override val maxSpeed: Int = 85
 
-    override val maxCapacity: Int = 3
+    override val capacity: Int = 3
 }
 
 class SportCar : PrivateTransportationVehicle {
@@ -47,7 +47,7 @@ class SportCar : PrivateTransportationVehicle {
 
     override val maxSpeed: Int = 400
 
-    override val maxCapacity: Int = 2
+    override val capacity: Int = 2
 }
 
 class HatchbackCar : PrivateTransportationVehicle {
@@ -55,7 +55,7 @@ class HatchbackCar : PrivateTransportationVehicle {
 
     override val maxSpeed: Int = 280
 
-    override val maxCapacity: Int = 4
+    override val capacity: Int = 4
 }
 
 fun main() {
@@ -85,10 +85,10 @@ fun main() {
     println("-----Vehicles sorted based on MINIMUM CAPACITY-----")
     val capacityComparator = kotlin.Comparator { vehicle1: Vehicle, vehicle2: Vehicle
         ->
-        vehicle1.maxCapacity - vehicle2.maxCapacity
+        vehicle1.capacity - vehicle2.capacity
     }
     listOfVehicles.run {
         sortedWith(capacityComparator)
-            .forEach { println("${it?.name}: ${it?.maxCapacity}") }
+            .forEach { println("${it?.name}: ${it?.capacity}") }
     }
 }
