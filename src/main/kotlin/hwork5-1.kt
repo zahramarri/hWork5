@@ -72,13 +72,14 @@ fun main() {
     }
 
     println("-----Vehicles sorted based on MAXIMUM SPEED-----")
-    val speedComparator = kotlin.Comparator { vehicle1: Vehicle, vehicle2: Vehicle
-        ->
-        vehicle1.maxSpeed - vehicle2.maxSpeed
-    }
+//    val speedComparator = kotlin.Comparator { vehicle1: Vehicle, vehicle2: Vehicle
+//        ->
+//        vehicle1.maxSpeed - vehicle2.maxSpeed
+//    }
     listOfVehicles.run {
-        sortedWith(speedComparator)
-            .reversed()
+//        sortedWith(speedComparator)
+            sortedByDescending { vehicle -> vehicle?.maxSpeed }
+//            .reversed()
             .forEach { println("${it?.name}: ${it?.maxSpeed}") }
     }
 
