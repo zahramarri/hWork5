@@ -61,7 +61,7 @@ class HatchbackCar : PrivateTransportationVehicle {
 fun main() {
     val listOfVehicles = Array<Vehicle?>(10) { null }
     for (i in listOfVehicles.indices) {
-        val randomObj = when ((1..6).random()) {
+        listOfVehicles[i] = when ((1..6).random()) {
             1 -> Subway()
             2 -> Taxi()
             3 -> Ambulance()
@@ -69,7 +69,6 @@ fun main() {
             5 -> SportCar()
             else -> HatchbackCar()
         }
-        listOfVehicles[i] = randomObj
     }
 
     println("-----Vehicles sorted based on MAXIMUM SPEED-----")
