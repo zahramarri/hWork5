@@ -8,16 +8,18 @@ fun main() {
         println("Your output is $i")
     }
 
-    //O (n^3 + n^2)
+    //O(n^2)
     for (i in 1..n) {
         for (j in 1..n) {
             println("Your output is $i and $j")
-
-        }
-        for (k in 1..factorial(n)) {
-            println("Your output is $k")
         }
     }
+
+    //O(n!)
+    for (k in 1..factorial(n)) {
+        println("Your output is $k")
+    }
+
 }
 
 fun factorial(n: Int): Int {
